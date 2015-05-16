@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deep Learning from the Ground Up, Liang2</title>
+  <meta name="viewport" content="width=792, user-scalable=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <!-- Icon -->
+  <link href="pics/favicon.png" rel="icon" type="image/x-icon" />
+  <!-- MathJax -->
+  <!-- CSS Stle -->
+  <link rel="stylesheet" href="lib/shower/themes/ribbon/styles/screen.css">
+  <link rel="stylesheet" href="lib/highlight/styles/tomorrow.css" type="text/css"/>
+  <link rel="stylesheet" href="static/custom.css" type="text/css"/>
+</head>
+<body class="list">
+  <!-- Header in overview -->
+  <header class="caption">
+    <h1>Deep Learning from the Ground Up</h1>
+    <p style="line-height: 32px; padding-top:15px;"><a href="http://liang2.tw">Liang Bo Wang (亮亮)</a>, 2015-05-16</p>
+  </header>
+
+  <!-- START OF SLIDE CONTENT -->
+
+  <!-- Cover slide -->
+  <section id="cover" class="slide cover w"><div>
+    <h3 id="talk-subheader">Taiwan R User Group, 2015-05-18</h3>
+    <h2 id="talk-header">Deep Learning from the Ground Up</h2>
+    <p id="talk-orig-author">
+      Orig. <a href="http://cs231n.stanford.edu/">Stanford CS231n course</a> by Andrej Karpathy and <br> Li Fei-Fei under MIT License
+    </p>
+    <p id="talk-author">
+      Adapted by <a href="http://liang2.tw" target="_blank">Liang<sup>2</sup></a> under CC 4.0 BY license
+    </p>
+    <p id="usage-instr">
+      <kbd>Esc</kbd> to overview <br />
+      <kbd>←</kbd> <kbd>→</kbd> to navigate
+    </p>
+    <img src="pics/cover.jpg" alt="">
+  </div>
+  <style>
+    #talk-header {
+      color: #D91A3C;
+      text-align: center;
+      font-size: 80px;
+      line-height: 1.2em;
+      opacity: 0.8;
+      position: relative;
+      top: -70px;
+    }
+    #talk-subheader {
+      color: #0376A6;
+      text-align: center;
+      font-size: 32px;
+      opacity: 0.3;
+      position: relative;
+      top: -90px;
+    }
+    #talk-orig-author,
+    #talk-author {
+      position: relative;
+      font-size: 24px;
+      line-height: 1.2em;
+      top: -60px;
+    }
+    #talk-author {
+      position: relative;
+      top: -50px;
+    }
+    #talk-orig-author,
+    #talk-author {
+      text-shadow: 1px 1px 3px #000;
+    }
+    #talk-orig-author a,
+    #talk-author a {
+      color: #FFFA20;
+    }
+    #cover p {
+      margin: 10px 0 0;
+      text-align: center;
+      color: #FFF;
+      font-size: 32px;
+      opacity: 0.8;
+    }
+    #usage-instr {
+      position: absolute;
+      text-align: right;
+      right: 30px;
+      bottom: 20px;
+    }
+    #usage-instr kbd {
+      opacity: 0.8;
+      color: #D91A3C;
+      background-color: white;
+    }
+    #cover .src-link {
+      position: absolute;
+      font-size: 14px;
+      text-align: right;
+      bottom: 10px;
+      right: 10px;
+    }
+    #cover img {
+      opacity: 1;
+    }
+  </style>
+  </section>
+
+  <section id="disclaimer" class="slide cover w shout"><div>
+      <h2>I don't own most of the content</h2>
+    </div>
+    <style>
+      #disclaimer h2 {
+        color: #D91A3C;
+      }
+    </style>
+  </section>
+
+  <section id="fast-pace" class="slide cover w shout"><div>
+      <h2>Far more details about DNN beside this talk</h2>
+    </div>
+    <style>
+      #fast-pace h2 {
+        color: #0376A6;
+      }
+    </style>
+  </section>
+
+  <section id="about-me" class="slide"><div>
+      <h2>About Me</h2>
+      <ul>
+        <li>Master student at <br />
+          Bioinfo &amp; Biostat Core Lab, NTU CGM</li>
+        <li>R / Python</li>
+        <li>Taiwan R co-organizer</li>
+        <li>PyCon APAC 2014-15/TW staff</li>
+        <li>Former intern at Microsoft Research Asia</li>
+        <li>Happy to chat about DNA and anime</li>
+      </ul>
+      <img id="protrait" src="pics/me.jpg" alt="">
+    </div>
+    <style>
+      #protrait {
+        position: absolute;
+        right: 120px;
+        top: 120px;
+      }
+    </style>
+  </section>
+
+  <section id="test-mathjax" class="slide"><div>
+      <h2>Demo MathJax</h2>  
+      <p>\(\frac{x}{y} + \pi\)</p>
+      <p>$$\frac{x}{y} + \pi$$</p>
+  </div></section>
+
+  <section id="builtin-cover" class="slide cover w" ><div>
+      <h2>Subheader<br>Example</h2>
+      <img src="pics/mid.jpg" alt="">
+    </div>
+    <style>
+      #builtin-cover h2 {
+        margin: 0px 0 0px;
+        color: #D91A3C;
+        text-align: left;
+        font-size: 100px;
+        line-height: 1.2em;
+        opacity: 0.8;
+        position: absolute;
+        top: 50px;
+        left: 60px;
+      }
+    </style>
+  </section>
+
+  <!-- End Slide -->
+  <section id='end' class='slide cover shout w'><div>
+    <h2>Thank You!</h2>
+    <img src="pics/end.jpg" alt="">
+  </div><style>
+    #end h2 {
+      position: absolute;
+      text-align: left;
+      top: 300px;
+      left: 50px;
+      color: #0376A6;
+      font-size: 92px;
+      opacity: 0.9;
+    }
+  </style></section>
+
+  <!-- END OF SLIDE CONTENT -->
+  <p class="badge"><a href="https://github.com/ccwang002/2015Talk-IPython-Parallel" target="_blank">Fork me on Github</a></p>
+  <div class="progress"><div></div></div>
+
+  <!-- Library -->
+  <script src="lib/highlight/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  <script src="lib/shower/shower.min.js"></script>
+  <!-- Mathjax -->
+  <!-- During local development, use localhost mathjax for speed-->
+  <!--<script src="file:///Users/liang/.ipython/profile_default/static/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
+  <!-- online Mathjax CDN -->
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

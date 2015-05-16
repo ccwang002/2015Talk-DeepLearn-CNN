@@ -1,0 +1,90 @@
+/* clean table */
+table.clean td img {
+    vertical-align: top;
+}
+table.clean td {
+    background: none;
+}
+
+h2.tighter {
+    margin: -40px 0 20px;
+}
+
+/* tighter paragraph */
+p.tighter {
+    margin: 0 0 25px;
+}
+
+/* tighter code */
+pre.tighter {
+    margin: 0 0 20px;
+}
+
+pre.full-page {
+    margin: -60px 0 0;
+}
+/* inline */
+p.inline {
+    margin-bottom: 0px;
+}
+
+ul.tighter {
+    margin-bottom: 25px;
+}
+
+/* smaller code */
+pre.small code {
+    font-size: 16px;
+    line-height: 2em;
+}
+
+.grey {
+    color: #BBB;
+}
+.red {
+    color: #D91A3C;
+}
+.blue {
+    color: #0376A6;
+}
+
+/* source link */
+div.ref-img p.src-link {
+    position: relative;
+    font-size: 14px;
+    text-align: right;
+    bottom: 10px;
+    right: 10px;
+}
+
+/* two column slides */
+section.slide.twocol div.left {
+    width: 50%;
+    float: left;
+}
+section.slide.twocol div.right {
+    width: 50%;
+    float: right;
+}
+
+section.slide.twocol-ll div.left {
+    width: 65%;
+    float: left;
+}
+section.slide.twocol-ll div.right {
+    width: 35%;
+    float: right;
+}
+
+section.slide.twocol-lr div.left {
+    width: 35%;
+    float: left;
+}
+section.slide.twocol-lr div.right {
+    width: 65%;
+    float: right;
+}
+
+section.slide img.full-width {
+    width: 100%;
+}
