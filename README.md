@@ -2,13 +2,16 @@
 
 ## Slides and Source Code
 
-Originally shared by Stanford CS231n using MIT License. I modified them to be PEP8-compliant and Py3k-compatible and also make them shorter to fit in a one-hour talk.
+**Nearly everything is originally from Stanford CS231n under MIT License**. Especially I didn't make most of the slide content, they are from excellent talks / papers / study notes and I carefully cite their works.
+
+I modified all code to be PEP8 compliant and Py3k compatible. In addition, most of the practices are shorter to fit in an one-hour talk.
+
 
 ## Setup the Envorinment
 
 ### Root Python version
 
-Recommend to use [miniconda3] or Anaconda3 (they are same in essence). This should work on Windows, Linux, and OSX. 
+Recommend to use [miniconda3] or Anaconda3 (they are same in essence). This should work on Windows, Linux, and OSX.
 
 I target for Python 3.4+ but should be fine on Pyhton 3.3. **Never ask me how to run on Python 2.7.** ...okay, the original source runs on Python 2.7 and I simply change some library import path and classic 2vs3 difference.
 
@@ -36,7 +39,7 @@ python
 
 ### Python virtual environment
 
-(Mini)conda handles the virtual environment itself. It is powerful and makes everythin simple for numerical computing packages.
+(Mini)conda handles the virtual environment itself. It is powerful and makes everything simple for numerical computing packages.
 
 
 ```bash
@@ -49,7 +52,7 @@ conda create -n dnn python=3.4 \
 Activate and deactivate the envrionment is easy,
 
 ```bash
-source activate dnn-mkl  # activate
+source activate dnn      # activate
 deactivate               # deactivate
 ```
 
