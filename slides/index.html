@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Deep Learning from the Ground Up, Liang2</title>
+  <title>CNN From the Ground Up, Liang2</title>
   <meta name="viewport" content="width=792, user-scalable=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <!-- Icon -->
@@ -16,7 +16,7 @@
 <body class="list">
   <!-- Header in overview -->
   <header class="caption">
-    <h1>Deep Learning from the Ground Up</h1>
+    <h1>Convolutional Neural Network From the Ground Up</h1>
     <p style="line-height: 32px; padding-top:15px;"><a href="http://liang2.tw">Liang Bo Wang (亮亮)</a>, 2015-05-16</p>
   </header>
 
@@ -25,7 +25,7 @@
   <!-- Cover slide -->
   <section id="cover" class="slide cover w"><div>
     <h3 id="talk-subheader">Taiwan R User Group, 2015-05-18</h3>
-    <h2 id="talk-header">Deep Learning from the Ground Up</h2>
+    <h2 id="talk-header" class="place">Convolutional Neural Network (CNN) From the Ground Up</h2>
     <p id="talk-orig-author">
       Orig. <a href="http://cs231n.stanford.edu/">Stanford CS231n course</a> by Andrej Karpathy and <br> Li Fei-Fei under MIT License
     </p>
@@ -46,7 +46,8 @@
       line-height: 1.2em;
       opacity: 0.8;
       position: relative;
-      top: -70px;
+      top: 20px;
+      width: 120%;
     }
     #talk-subheader {
       color: #0376A6;
@@ -61,15 +62,13 @@
       position: relative;
       font-size: 24px;
       line-height: 1.2em;
+      text-shadow: 1px 1px 3px #000;
+    }
+    #talk-orig-author {
       top: -60px;
     }
     #talk-author {
-      position: relative;
       top: -50px;
-    }
-    #talk-orig-author,
-    #talk-author {
-      text-shadow: 1px 1px 3px #000;
     }
     #talk-orig-author a,
     #talk-author a {
@@ -106,8 +105,8 @@
   </style>
   </section>
 
-  <section id="disclaimer" class="slide cover w shout"><div>
-      <h2>I don't own most of the content</h2>
+  <section id="disclaimer" class="slide w shout"><div>
+      <h2>I don't own / create most of the content</h2>
     </div>
     <style>
       #disclaimer h2 {
@@ -116,7 +115,7 @@
     </style>
   </section>
 
-  <section id="fast-pace" class="slide cover w shout"><div>
+  <section id="fast-pace" class="slide w shout"><div>
       <h2>Far more details about DNN beside this talk</h2>
     </div>
     <style>
@@ -137,21 +136,39 @@
         <li>Former intern at Microsoft Research Asia</li>
         <li>Happy to chat about DNA and anime</li>
       </ul>
-      <img id="protrait" src="pics/me.jpg" alt="">
+      <img id="protrait" src="pics/me.jpg" class="place r"alt="">
     </div>
     <style>
       #protrait {
-        position: absolute;
-        right: 120px;
-        top: 120px;
+        margin-right: 120px;
+        width: 300px;
       }
     </style>
   </section>
 
-  <section id="test-mathjax" class="slide"><div>
-      <h2>Demo MathJax</h2>  
-      <p>\(\frac{x}{y} + \pi\)</p>
-      <p>$$\frac{x}{y} + \pi$$</p>
+  <section id="super-img-class" class="slide twocol"><div>
+      <h2>Supervised Image Classification</h2>
+      <div class="left">
+        <ul>
+          <li><strong>Input:</strong> RGB pixel values</li>
+          <li><strong>Output:</strong> classes / labels, usually with a score</li>
+          <li>The classifier learns their relationship from data</li>
+          <li>So data are splitted into training / validation / testing datset</li>
+        </ul>
+      </div>
+      <div id="cite-lovelive" class="place b r citation">
+        <img src="pics/external/lovelive_classification.jpg" alt="">
+        <p>Ref: <a href="http://christina.hatenablog.com/entry/2015/01/23/212541">Deep Learningでラブライブ！キャラを識別する</a></p>
+      </div>
+      <style>
+        #super-img-class .left {
+          width: 40%;
+        }
+        #cite-lovelive {
+          margin-bottom: 50px;
+          width: 420px;
+        }
+      </style>
   </div></section>
 
   <section id="builtin-cover" class="slide cover w" ><div>
@@ -172,6 +189,12 @@
       }
     </style>
   </section>
+
+  <section id="test-mathjax" class="slide"><div>
+      <h2>Demo MathJax</h2>
+      <p>\(\frac{x}{y} + \pi\)</p>
+      <p>$$\frac{x}{y} + \pi$$</p>
+  </div></section>
 
   <!-- End Slide -->
   <section id='end' class='slide cover shout w'><div>
