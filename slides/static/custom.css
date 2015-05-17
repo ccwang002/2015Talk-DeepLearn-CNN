@@ -1,3 +1,24 @@
+/* reference */
+.citation p {
+    font-size: 12px;
+    line-height: 14px;
+    text-align: right;
+    margin: -10px 0 0 0;
+}
+.citation a {
+    color: #5C9966;
+}
+.citation img {
+    width: 100%;
+    height: 100%;
+}
+.citation.place.r {
+    margin-right: 120px;
+}
+.citation.place.l {
+    margin-left: 120px;
+}
+
 /* clean table */
 table.clean td img {
     vertical-align: top;
