@@ -287,7 +287,8 @@
         <li>How to update the parameters based on this loss function?</li>
         <li>It's like being lost in a mountain and try to find a way home, no map.</li>
         <li>Height analogs to our loss function; position is our 2D parameters.</li>
-        <li>Strategy: <strong>gradients of the loss function</strong> feet on your ground, follow the slope of hills.
+        <li>Strategy: <strong>gradients of the loss function</strong>. <br>
+        Feel feet on your ground, follow the slope of hills.
           $$
             \frac{df(x)}{dx} = \lim_{h\ \to 0} \frac{f(x + h) - f(x)}{h}
           $$
@@ -308,9 +309,10 @@
       <h2>Analytical gradients</h2>
       <ul>
         <li>Numerical gradients is slow (think of computing this for all \(W\) dimensions.</li>
-        <li>We learnt calculus ... so what's the gradient for softmax?
+        <li>We know Calculus ... so what's the gradient of softmax?
           $$
-          \frac{\partial L_i}{ \partial f_j} = -\frac1N \left(L_i (\mathbb{1}(i = j) - L_j)\right), \hspace{1em}
+          \frac{\partial L_i}{ \partial f_j} = - \left[\mathbb{1}(i = j) - p_j\right] \hspace{1em}
+            p_i = \frac{e^{f_i}}{\sum e^{f}} \hspace{1em}
             \frac{\partial f_j}{ \partial w_j} = x_j
           $$
         </li>
@@ -336,7 +338,7 @@ while it &lt; max_iter:
 
   <section class="slide"><div>
       <h2>Get your hand wet</h2>
-      <p>For what doest CIFAR-10 look like, try notebook 00.</p>
+      <p>For what does the CIFAR-10 dataset look like and data preprocessing, try notebook 00.</p>
       <p>For softmax linear classifier, try notebook 01.</p>
   </div></section>
 
