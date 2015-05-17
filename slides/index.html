@@ -184,7 +184,7 @@
       </ul>
   </div></section>
 
-  <section class="slide"><div>
+  <section id="general-ml-framework" class="slide"><div>
       <h2>General machine learning framework</h2>
       <ol>
         <li>A mapping function \(f\) from input features \(x\) to scores of output class \(f\).
@@ -194,7 +194,7 @@
           j, y_i \in \{1 \ldots K\}
           $$</li>
         <li>A loss function \(L\) to compute the difference between \(y_i\) and \(\hat{y_i}\).</li>
-        <li>Lower the loss as much as possible by updating the parameter \(W\).</li>
+        <li>Optimize (Lower) the loss by updating the parameter \(W\).</li>
         <li>Stop the update when max iterations are reached or stop criteria meets.</li>
       </ol>
   </div></section>
@@ -208,6 +208,132 @@
       }
     </style>
   </section>
+
+  <section class="slide"><div>
+      <h2>Linear classifier</h2>
+      <p>Training dataset of images \(x_i \in R^D\) each with label \(y_i\) for \(N\) examples, \(i = 1 \ldots N\) and \(y_i \in 1 \ldots K\).
+        $$
+        f(x_i; W, b) = W x_i + b \hspace{2em} f: R^D \mapsto R^K
+        $$
+        where parameters are \(W\) [K x D] called <strong>weights</strong> and \(b\) [K x 1] called <strong>bias vector</strong>.
+       </p>
+      <p>In CIFAR-10 dataset, \(N\) = 50,000, \(D\) = 32 x 32 x 3 = 3072, \(K\) = 10.</p>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Linear classifier visualized</h2>
+      <div class="citation">
+        <img src="pics/external/cs231n_note_linear_classification.png" alt="">
+        <p>Ref: <a href="http://cs231n.github.io/linear-classify/">CS231n Note: Linear Clasification</a></p>
+      </div>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Bias trick</h2>
+      <div class="citation">
+        <img src="pics/external/cs231n_note_bias_trick.png" alt="">
+        <p>Ref: <a href="http://cs231n.github.io/linear-classify/">CS231n Note: Loss optimization</a></p>
+      </div>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Loss function - Softmax</h2>
+      <p>
+        $$
+        L_i = -\log\left(\frac{e^{f_{y_i}}}{\sum_j e^{f_j}}\right)
+        $$
+        \(e^{f_{y_i}}\) is like probability yet being normalized. Ex. \(-\log 10 &lt; -\log 0.01 \). Higher score leads to lower loss. <br>
+        For numerical stability, in computation \(
+        \frac{e^{f_{y_i}}}{\sum_j e^{f_j}}
+        = \frac{C \cdot e^{f_{y_i}}}{C \cdot \sum_j e^{f_j}}
+        = \frac{e^{f_{y_i} + \log C}}{\sum_j e^{f_j + \log C}}
+        \) and let \(
+          \log C = -\max_j f_j
+        \) to normalized the exp. of the largest score to be 1.</p>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>L2 Regularization</h2>
+      <ul>
+        <li>Set of parameters \(W\) having the lowest loss is not unique. \(\phi W, \phi &gt; 1\)</li>
+        <li>Regularization of \(L2\) norm and a hyperparameter \(\lambda\) to tune the strength
+          $$
+            R(W) = \sum_k\sum_l W_{k,l}^2
+          $$
+        </li>
+        <li>Full loss function includes avg. data loss and regularization loss
+          $$
+          L =
+            \underbrace{ \frac{1}{N} \sum_i L_i }_\text{data loss} +
+            \underbrace{ \lambda R(W) }_\text{regularization loss}
+          $$
+        </li>
+      </ul>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Regularization (cont'd)</h2>
+      <ul>
+        <li>Penalizing large weights tends to improve generalization.</li>
+        <li>For example, $$ x = [1, 1, 1, 1] \hspace{1em} w_1 = [1, 0, 0, 0] \hspace{1em} w_2 = [0.5, 0.5, 0.5, 0.5]$$
+        where their L2 penalty are 0.5 and 0.25 respectively, \(w_2\) is preferred.</li>
+        <li>L2 penalty prefers smaller and more diffuse weight vectors. Imply using more input dimensions instead of betting on one or two.</li>
+      </ul>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Loss optimization</h2>
+      <ul>
+        <li>How to update the parameters based on this loss function?</li>
+        <li>It's like being lost in a mountain and try to find a way home, no map.</li>
+        <li>Height analogs to our loss function; position is our 2D parameters.</li>
+        <li>Strategy: <strong>gradients of the loss function</strong> feet on your ground, follow the slope of hills.
+          $$
+            \frac{df(x)}{dx} = \lim_{h\ \to 0} \frac{f(x + h) - f(x)}{h}
+          $$
+        </li>
+        <li>Called numerical gradients. Practically use \([f(x + h) -  f(x - h)] / 2h\)</li>
+      </ul>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Choose the step size (learning rate)</h2>
+      <div class="citation">
+        <img src="pics/external/cs231n_note_vis_loss_fun.png" alt="">
+        <p>Ref: <a href="http://cs231n.github.io/optimization-1/">CS231n Note: Linear Clasification</a></p>
+      </div>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Analytical gradients</h2>
+      <ul>
+        <li>Numerical gradients is slow (think of computing this for all \(W\) dimensions.</li>
+        <li>We learnt calculus ... so what's the gradient for softmax?
+          $$
+          \frac{\partial L_i}{ \partial f_j} = -\frac1N \left(L_i (\mathbb{1}(i = j) - L_j)\right), \hspace{1em}
+            \frac{\partial f_j}{ \partial w_j} = x_j
+          $$
+        </li>
+        <li>Use the chain rule to get the gradient for
+          \(\frac{\partial L_i}{ \partial w_j}
+          = \frac{\partial L_i}{ \partial f_j} \cdot \frac{\partial f_j}{ \partial w_j}\)
+        </li>
+        <li>Already on edge? Check with the numerical gradients.</li>
+      </ul>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Gradient Descent</h2>
+      <pre class="language-python tighter">
+      <code># Vanilla Minibatch Gradient Descent
+while it &lt; max_iter:
+    data_batch = sampling(data, 256)
+    weights_grad = gradient(loss_f, data_batch, weights)
+    weights += - step_size * weights_grad</code>
+      </pre>
+    <p class="tighter">Stochastic Gradient Descent (SGD) when batch contains only 1 sample.</p>
+  </div></section>
+
 
   <section id="test-cover" class="slide cover w subheader"><div>
       <h2>Subheader<br>Example</h2>
