@@ -15,10 +15,12 @@ Recommend to use [miniconda3] or Anaconda3 (they are same in essence). This shou
 
 I target for Python 3.4+ but should be fine on Pyhton 3.3. **Never ask me how to run on Python 2.7.** ...okay, the original source runs on Python 2.7 and I simply change some library import path and classic 2vs3 difference.
 
+> NOTE for Windows user: VS 2010 Professional+ is needed to have a 64bit C compiler. DONT use Cgywin or MinGW if you simply just googled and found them.
+
 
 ### (Skippable) Setup using pyenv
 
-You can use [pyenv] to manage multiple Python versions without breaking the system-wide setting. Follow pyenv's readme to set up, which has been tested to work on Debian, Ubuntu, and OSX.
+You can use [pyenv] to manage multiple Python versions without breaking the system-wide setting. Follow pyenv's readme to set up, which has been tested to work on Debian, Ubuntu, and OSX (but not on Windows).
 
 ```bash
 # under this repo root
@@ -52,8 +54,8 @@ conda create -n dnn python=3.4 \
 Activate and deactivate the envrionment is easy,
 
 ```bash
-source activate dnn      # activate
-deactivate               # deactivate
+source activate dnn
+deactivate
 ```
 
 [pyenv]: https://github.com/yyuu/pyenv
@@ -62,7 +64,22 @@ deactivate               # deactivate
 
 
 ### Init the dataset
-(TODO)
+
+Go to `code/cs231n/datasets` and run the script `get_datasets.sh`.
+
+> NOTE for Windows user: In addition, by default tools like wget and tar do not exist so `get_dataset.sh` will fail, but it can be done using pure Python through `urllib.request.urlretrieve(url, local_pth)` and `python -m tarfile -e xxxx.tar.gx`.
+
+### Run the notebook
+
+Go to `code` and run
+
+```bash
+source activate dnn
+ipython notebook
+```
+
+A web browser will pop up on <http://localhost:8888> by default. If the code runs on a server, try bind to the correct ip address by `ipython notebook --ip="<your-ip>"` and make sure the port is permitted by the firewall.
+
 
 ## License
 
