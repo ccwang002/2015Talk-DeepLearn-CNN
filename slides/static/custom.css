@@ -19,6 +19,19 @@
     margin-left: 120px;
 }
 
+/* sub header */
+.slide.subheader h2 {
+    margin: 0px 0 0px;
+    color: #D91A3C;
+    text-align: left;
+    font-size: 100px;
+    line-height: 1.2em;
+    opacity: 0.8;
+    position: absolute;
+    top: 50px;
+    left: 60px;
+}
+
 /* clean table */
 table.clean td img {
     vertical-align: top;
