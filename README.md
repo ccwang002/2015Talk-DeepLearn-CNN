@@ -7,7 +7,7 @@
 I modified all code to be PEP8 compliant and Py3k compatible. In addition, most of the practices are shorter to fit in an one-hour talk.
 
 
-## Setup the Envorinment
+## Envorinment Setup
 
 ### Root Python version
 
@@ -64,22 +64,21 @@ deactivate               # deactivate
 ### Init the dataset
 (TODO)
 
-## 授權 License
+## License
 
 The slide is powered by
 
-- [reveal.js]: HTML5 framework by Hakim El Hattab *et al.*, under MIT license
+- [shower.js]: HTML5 slideshow framework by Vadim Makeev *et al.*, under MIT license
 - [highlight.js]: Syntax highlight library by Ivan Sagalaev *et al.*, under MIT license
 
-除另外標示，本
+Unless explicitly stated,
 
-- 投影片內容（`slides`目錄下）係使用創用 CC 姓名標示 4.0 國際（Creative Commons 4.0 BY International）授權條款授權。
+- the content of the slides (at `slides` folder) is shared under Creative Commons 4.0 BY licesne.
+- the code is shared under MIT license.
 
-- 程式碼係使用 MIT 授權。
-
-授權條款可以分別參見檔案 [CC 4.0 使用條款]以及`LICENSE_MIT`。
+More information about license at [CC Attribution 4.0] and `LICENSE_MIT`.
 
 [reveal.js]: https://github.com/hakimel/reveal.js
 [shower.js]: https://github.com/shower/shower
 [highlight.js]: http://highlightjs.org/
-[CC 4.0 使用條款]: http://creativecommons.org/licenses/by/4.0/deed.zh_TW
+[CC Attribution 4.0]: https://creativecommons.org/licenses/by/4.0/
