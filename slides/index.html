@@ -328,12 +328,17 @@
       <code># Vanilla Minibatch Gradient Descent
 while it &lt; max_iter:
     data_batch = sampling(data, 256)
-    weights_grad = gradient(loss_f, data_batch, weights)
-    weights += - step_size * weights_grad</code>
+    dw = gradient(loss_fun, data_batch, w)
+    w += - step_size * w</code>
       </pre>
     <p class="tighter">Stochastic Gradient Descent (SGD) when batch contains only 1 sample.</p>
   </div></section>
 
+  <section class="slide"><div>
+      <h2>Get your hand wet</h2>
+      <p>For what doest CIFAR-10 look like, try notebook 00.</p>
+      <p>For softmax linear classifier, try notebook 01.</p>
+  </div></section>
 
   <section id="test-cover" class="slide cover w subheader"><div>
       <h2>Subheader<br>Example</h2>
