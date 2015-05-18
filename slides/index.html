@@ -337,7 +337,7 @@ while it &lt; max_iter:
   </div></section>
 
   <section class="slide"><div>
-      <h2>Get your hand wet</h2>
+      <h2>Get our hands wet</h2>
       <p>For what does the CIFAR-10 dataset look like and data preprocessing, try notebook 00.</p>
       <p>For softmax linear classifier, try notebook 01.</p>
   </div></section>
@@ -505,6 +505,44 @@ dfdy = 1.0 * dfdq  # = -4, dq/dy = 1</code>
         <img src="pics/external/cs231n_note_back_prop.png" alt="">
         <p>Ref: <a href="http://cs231n.github.io/optimization-2/">CS231n Note: Optimization 2</a></p>
       </div>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Backprop in practice</h2>
+      <ul>
+        <li>Compute all backprop gradients. Ex. Compute both dW and dx.</li>
+        <li>Cache forward pass variables. Ex. Cache all W, x</li>
+        <li>Since it is chain rule, always multiply the gradients from upper stage.</li>
+        <li>Common gates (acts like): add (pass), max (switch) and multiply (swap).</li>
+        <li>How to expand to matrix-matrix gradient computation?</li>
+        <li>Dimension of x and dx <strong>match</strong>.<D-r></li>
+      </ul>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Matrix-Matrix multiply gradient</h2>
+      <pre class="language-python">
+<code># forward pass
+W = np.random.randn(5, 10)
+X = np.random.randn(10, 3)
+D = W.dot(X)  # shape (5, 3)
+# ... suppose we had the gradient on D from upper stage
+dD = np.random.randn(*D.shape)  # same shape as D
+dW = dD.dot(X.T)  # X.T = X's transpose matrix
+dX = W.T.dot(dD)</code></pre>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Get our hands wet</h2>
+      <p>Now we are able to make a 2-layer fully connected (FC) NN, which has the structure:
+        <span class="blue">input - FC layer - ReLU - FC layer - softmax - out class</span></p>
+      <p>It's in notebook 02.</p>
+      <p>But I'm afraid we are almost running out of time so probably just see the final result to get the whole picture.</p>
+  </div></section>
+
+  <section class="cnn-cover slide cover w subheader"><div>
+      <h2>Convolutional Neural Network (CNN)</h2>
+      <img src="pics/mid.jpg" alt="">
   </div></section>
 
   <section id="test-cover" class="slide cover w subheader"><div>
