@@ -348,7 +348,164 @@ while it &lt; max_iter:
     </div>
   </section>
 
+  <section class="slide"><div>
+      <h2>Our "artifact" neuron as a linear classifier</h2>
+      <div class="citation">
+        <img src="pics/external/cs231n_note_neuron.png" alt="" />
+        <p>Ref: <a href="http://cs231n.github.io/neural-networks-1/">CS231n Note: Neural Network 1</a></p>
+      </div>
+      <p>We model the neuron by two parts: linear combination \(\sum w_i x_i\) and activation function \(f\)</p>
+  </div></section>
 
+  <section class="slide"><div>
+      <h2>Choices for activation function</h2>
+      <ul>
+        <li>Traditionally, sigmoid \(\sigma(x) = 1 / (1 + e^{-x})\) and tanh.</li>
+        <li>We use <strong>ReLU</strong> (The Rectified Linear Unit): $$f(x) = max(0, x)$$</li>
+        <li>There remains many alternatives, such as leaky ReLU and maxout.</li>
+        <li>Activation function introduces the non-linearity.</li>
+      </ul>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2 class="tighter">Fully-connected layer</h2>
+      <div class="citation">
+        <img src="pics/external/cs231n_note_nn_arch.png" alt="">
+        <p>Ref: <a href="http://cs231n.github.io/neural-networks-1/">CS231n Note: Neural Network 1</a></p>
+      </div>
+      <p>Total size of parameters (weights and biases) [input x #neuron]:<br>
+        Left is (3 + 1) x 4 + (4 + 1) x 2 = 26.<br>
+        Right is (3 + 1) x 4  + (4 + 1) x 4 + (4 + 1) x 1 = 41.</li>
+      </p>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Example feed-forward computation</h2>
+      <pre class="language-python tighter">
+<code># forward-pass of a 3-layer neural network:
+f = lambda x: np.where(x &gt; 0, x, 0)  # ReLU activation
+x = np.random.randn(3, 1)    # input vector (3x1)
+h1 = f(np.dot(W1, x) + b1)   # 1st hidden layer (4x1)
+h2 = f(np.dot(W2, h1) + b2)  # 2nd hidden layer (4x1)
+out = np.dot(W3, h2) + b3    # output neuron (1x1)</code>
+      </pre>
+      <p>The dim of Ws, bs: W1(4x3), b1(4x1), W2(4x4), b2(4x1), W3(4x1), b3(1x1)<br>
+        Note that x can be (3xN) for batch input; no act. fun. in output layer.</p>
+  </div></section>
+
+  <section id="back-prop" class="slide"><div>
+      <h2 class="tighter">Backward propagation</h2>
+      <ul>
+        <li>Response of output layer, \(out\), goes to the loss function.</li>
+        <li>Loss function returns the update direction for response, \(\Delta out\).</li>
+        <li>But how to modify \(W\)s and \(b\)s to yield the desired change of \(\Delta out\)?</li>
+        <li>Recall Calculus ... <strong>Use chain rule</strong>
+          $$
+          \begin{align*}
+          f(x,y) = x y \hspace{1em} &\rightarrow \hspace{1em} \frac{\partial f}{\partial x} = y  \hspace{1em} \frac{\partial f}{\partial y} = x \\
+          f(x,y) = x + y \hspace{1em} &\rightarrow \hspace{1em} \frac{\partial f}{\partial x} = 1 \hspace{1em} \frac{\partial f}{\partial y} = 1 \\
+          f(x,y) = \max(x, y) \hspace{1em} &\rightarrow \hspace{1em} \frac{\partial f}{\partial x} = \mathbb{1}(x >= y) \hspace{1em} \frac{\partial f}{\partial y} = \mathbb{1}(y >= x)
+          \end{align*}
+          $$
+        </li>
+      </ul>
+  </div></section>
+
+  <section id="back-prop-first-try" class="slide twocol"><div>
+      <div class="left">
+        <p>
+          $$
+          f(x, y, z) = (x + y) z \\
+          q = x + y, \hspace{0.5em} f = qz
+          $$
+          $$
+          \begin{align*}
+          \Rightarrow \frac{\partial q}{\partial x}
+            &= \frac{\partial q}{\partial y} = 1
+          \end{align*}
+          $$
+
+          $$
+          \begin{align*}
+          \Rightarrow \frac{\partial f}{\partial x}
+            &= \frac{\partial f}{\partial q}\frac{\partial q}{\partial x} = z \cdot 1\\
+          \frac{\partial f}{\partial y}
+            &= \frac{\partial f}{\partial q}\frac{\partial q}{\partial y} = z \cdot 1\\
+          \frac{\partial f}{\partial z}
+            &= q
+          \end{align*}
+          $$
+        </p>
+      </div>
+      <div class="right">
+        <pre class="language-python small">
+<code># set some inputs
+x = -2; y = 5; z = -4
+
+# perform the forward pass
+q = x + y  # q = 3
+f = q * z  # f becomes -12
+
+# perform the backward pass (back prop)
+# in reverse order:
+# first backprop through f = q * z
+dfdz = q  # = 3
+dfdq = z  # = -4
+# now backprop through q = x + y
+dfdx = 1.0 * dfdq  # = -4, dq/dx = 1
+dfdy = 1.0 * dfdq  # = -4, dq/dy = 1</code>
+        </pre>
+        <div class="citation next place r b">
+          <div class="placeholder"></div>
+        <img src="pics/external/cs231n_note_back_prop_simple.png" alt="">
+        <p>Ref: <a href="http://cs231n.github.io/optimization-2/">CS231n Note: Optimization 2</a></p>
+        </div>
+      </div>
+      <style>
+        #back-prop-first-try .citation {
+          width: 40%;
+          margin-bottom: 40px;
+        }
+      </style>
+  </div></section>
+
+  <section id="back-prop-ex" class="slide"><div>
+      <h2 class="tighter">Backward propagation example</h2>
+      <p>Think of a sigmoid function,
+        \(
+        f(w,x) = \frac{1}{1+e^{-(w_0x_0 + w_1x_1 + w_2)}}
+        \).<br>
+        First compute all the building blocks,
+        $$
+        \begin{align*}
+        f(x) = \frac{1}{x}
+        \hspace{1em} &\rightarrow \hspace{1em}
+        \frac{df}{dx} = -1/x^2
+        \\
+        f_c(x) = c + x
+        \hspace{1em} &\rightarrow \hspace{1em}
+        \frac{df}{dx} = 1
+        \\
+        f(x) = e^x
+        \hspace{1em} &\rightarrow \hspace{1em}
+        \frac{df}{dx} = e^x = f(x)
+        \\
+        f_a(x) = ax
+        \hspace{1em} &\rightarrow \hspace{1em}
+        \frac{df}{dx} = a
+        \end{align*}
+        $$
+        Given initial w0, x0, w1, x1, w2 values (cont'd on next page)
+      </p>
+  </div></section>
+
+  <section id="back-prop-vis" class="slide"><div>
+      <h2>Backward propagation example (cont'd)</h2>
+      <div class="citation">
+        <img src="pics/external/cs231n_note_back_prop.png" alt="">
+        <p>Ref: <a href="http://cs231n.github.io/optimization-2/">CS231n Note: Optimization 2</a></p>
+      </div>
+  </div></section>
 
   <section id="test-cover" class="slide cover w subheader"><div>
       <h2>Subheader<br>Example</h2>
