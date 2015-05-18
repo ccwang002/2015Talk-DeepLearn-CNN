@@ -1,5 +1,11 @@
 # Hands-on: Deep Learning and CNN
 
+Taiwan R User Group, 2015-05-18
+
+Meetup link: <http://www.meetup.com/Taiwan-R/events/220799374/>
+Youtube screencast: <http://youtu.be/YI5CLMcvnpY>
+
+
 ## Slides and Source Code
 
 **Nearly everything is originally from Stanford CS231n under MIT License**. Especially I didn't make most of the slide content, they are from excellent talks / papers / study notes and I carefully cite their works.
