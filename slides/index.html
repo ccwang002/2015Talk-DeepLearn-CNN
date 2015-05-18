@@ -658,7 +658,7 @@ dX = W.T.dot(dD)</code></pre>
   </div></section>
 
   <section class="slide"><div>
-      <h2>Convolutional layer - spatial arrangement (cont'd)</h2>
+      <h2>Conv. layer - spatial arrangement (cont'd)</h2>
       <ul>
         <li>Use of zero padding: when \(P = (F - 1) / 2\) and \(S=1\), the input volume and output volume have same size.</li>
         <li>Not every stride value is feasible.</li>
@@ -668,7 +668,7 @@ dX = W.T.dot(dD)</code></pre>
   </div></section>
 
   <section class="slide"><div>
-      <h2>Convolutional layer - parameter sharing</h2>
+      <h2>Conv. layer - parameter sharing</h2>
       <ul>
         <li>Now we have 55x55x96 = 290,400 neurons in the first Conv layer, and each has 11x11x3 = 363 weights + 1 bias. Together this adds up to 290,400 x 364 = 105,706,600 parameters for the first layer alone.</li>
         <li>Assumption: <strong>neurons at same depth share same parameters</strong></li>
@@ -687,7 +687,7 @@ dX = W.T.dot(dD)</code></pre>
   </div></section>
 
   <section class="slide"><div>
-      <h2>Convolutional layer - summary</h2>
+      <h2>Conv. layer - summary</h2>
       <ul>
         <li>Accepts a volume of size \(W_1 \times H_1 \times D_1 \)</li>
         <li>Four hyperparameter: depth(#filters) \(K\), receptive field size \(F\), stride \(S\) and amount of zero padding \(P\)</li>
@@ -792,9 +792,10 @@ dX = W.T.dot(dD)</code></pre>
   </div></section>
 
   <section id="thanks-orig-author" class="slide shout w">
-    <h2>If you like the content, go thank the original author (not me)</h2>
+    <h2>If you like the content, go thank the <a href="https://twitter.com/karpathy">original author</a> (not me)</h2>
     <style>
-      #thanks-orig-author h2 {
+      #thanks-orig-author h2,
+      #thanks-orig-author h2 a {
         color: #D91A3C;
       }
     </style>
