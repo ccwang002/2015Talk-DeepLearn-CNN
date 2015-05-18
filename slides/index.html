@@ -540,6 +540,69 @@ dX = W.T.dot(dD)</code></pre>
       <p>But I'm afraid we are almost running out of time so probably just see the final result to get the whole picture.</p>
   </div></section>
 
+  <section class="slide"><div>
+      <h2>Before learning: sanity checks tips/tricks</h2>
+      <ul>
+        <li>Gradient check using numerical gradients.</li>
+        <li>Turn off regularization to check for correct loss at chance performance. Ex. CIFAR-10 initial softmax loss is around 2.302 (= -ln 0.1).</li>
+        <li>Increase regularization should increase loss.</li>
+        <li>Overfit a tiny subset of data (e.g. 20 samples).</li>
+      </ul>
+  </div></section>
+
+  <section class="slide"><div>
+      <h2>Back on parameter updates</h2>
+      <ul>
+        <li>Previously we use SGD and an analogue of finding path in mountains to home by approaching the inverse direction of slope.</li>
+        <li>In real world, <strong>the slope controls the acceleration rate</strong> not the speed itself.</li>
+        <li>Learning rate decay.</li>
+        <li>Momentum update: \(mu \in [0, 1)\)</li>
+      </ul>
+      <pre class="language-python">
+<code>v = mu * v - learning_rate * <mark class="warning">dx</mark> # integrate velocity
+<mark class="warning">x</mark> += v # integrate position</code>
+          </pre>
+  </div></section>
+
+  <section id="comp-param-update" class="slide"><div>
+      <h2 class="tighter">Parameter update method comparison</h2>
+      <div class="citation">
+        <div class="twocol">
+          <img src="pics/external/cs231n_note_opt1.gif" alt="">
+          <img src="pics/external/cs231n_note_opt2.gif" alt="">
+        </div>
+        <p class="note">Animations that may help your intuitions about the learning process dynamics. <strong>Left</strong>: Contours of a loss surface and time evolution of different optimization algorithms. Notice the "overshooting" behavior of momentum-based methods, which make the optimization look like a ball rolling down the hill. <strong>Right</strong>: A visualization of a saddle point in the optimization landscape, where the curvature along different dimension has different signs (one dimension curves up and another down). Notice that SGD has a very hard time breaking symmetry and gets stuck on the top. Conversely, algorithms such as RMSprop will see very low gradients in the saddle direction. Tue to the denominator term in the RMSprop update, this will increase the effective learning rate along this direction, helping RMSProp proceed.
+        </p>
+        <p>Ref: <a href="http://cs231n.github.io/neural-networks-3/">CS231n Note: Neural Network 3</a> and Image credit: <a href="https://twitter.com/alecrad">Alec Radford</a>.</p>
+      </div>
+      <style>
+        #comp-param-update .citation .twocol {
+          text-align: center;
+        }
+        #comp-param-update .citation .twocol > img:nth-child(1) {
+          margin-left: auto;
+          width: 47%;
+        }
+        #comp-param-update .citation .twocol> img:nth-child(2) {
+          width: 47%;
+        }
+        #comp-param-update .citation > p:not(.note) {
+          margin-top: 10px;
+          margin-right: 15px;
+        }
+        #comp-param-update .citation > p.note {
+          margin-top: 0px;
+          margin-right: 15px;
+          margin-left: 15px;
+          text-align: left;
+          font-size: 14px;
+          line-height: 18px;
+          color: #888;
+        }
+
+      </style>
+  </div></section>
+
   <section class="cnn-cover slide cover w subheader"><div>
       <h2>Convolutional Neural Network (CNN)</h2>
       <img src="pics/mid.jpg" alt="">
