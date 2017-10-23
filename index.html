@@ -9,6 +9,7 @@
   <link href="pics/favicon.png" rel="icon" type="image/x-icon" />
   <!-- MathJax -->
   <!-- CSS Stle -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css" integrity="sha256-kAbX9Z5ZMhjo34PRGEMc7RiueevlbmDilvUt1NsZGAI=" crossorigin="anonymous" />
   <link rel="stylesheet" href="lib/shower/themes/ribbon/styles/screen.css">
   <link rel="stylesheet" href="lib/highlight/styles/tomorrow.css" type="text/css"/>
   <link rel="stylesheet" href="static/custom.css" type="text/css"/>
@@ -203,8 +204,10 @@
         <li>A mapping function \(f\) from input features \(x\) to scores of output class \(f\).
           Class with highest score is chosed as the prediction for input \(i\).
           $$
+          \begin{aligned}
           \hat{y_i} = \arg\max_j f(x_i; W)_j \\
           j, y_i \in \{1 \ldots K\}
+          \end{aligned}
           $$</li>
         <li>A loss function \(L\) to compute the difference between \(y_i\) and \(\hat{y_i}\).</li>
         <li>Optimize (Lower) the loss by updating the parameter \(W\).</li>
@@ -224,10 +227,10 @@
 
   <section class="slide"><div>
       <h2>Linear classifier</h2>
-      <p>Training dataset of images \(x_i \in R^D\) each with label \(y_i\) for \(N\) examples, \(i = 1 \ldots N\) and \(y_i \in 1 \ldots K\).
-        $$
-        f(x_i; W, b) = W x_i + b \hspace{2em} f: R^D \mapsto R^K
-        $$
+       <p>Training dataset of images \(x_i \in R^D\) each with label \(y_i\) for \(N\) examples, \(i = 1 \ldots N\) and \(y_i \in 1 \ldots K\).
+
+        $$f(x_i; W, b) = W x_i + b \quad\quad f: R^D \mapsto R^K$$
+
         where parameters are \(W\) [K x D] called <strong>weights</strong> and \(b\) [K x 1] called <strong>bias vector</strong>.
        </p>
       <p>In CIFAR-10 dataset, \(N\) = 50,000, \(D\) = 32 x 32 x 3 = 3072, \(K\) = 10.</p>
@@ -237,7 +240,7 @@
       <h2>Linear classifier visualized</h2>
       <div class="citation">
         <img src="pics/external/cs231n_note_linear_classification.png" alt="">
-        <p>Ref: <a href="http://cs231n.github.io/linear-classify/">CS231n Note: Linear Clasification</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/linear-classify/">CS231n Note: Linear Clasification</a></p>
       </div>
   </div></section>
 
@@ -245,7 +248,7 @@
       <h2>Bias trick</h2>
       <div class="citation">
         <img src="pics/external/cs231n_note_bias_trick.png" alt="">
-        <p>Ref: <a href="http://cs231n.github.io/linear-classify/">CS231n Note: Loss optimization</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/linear-classify/">CS231n Note: Loss optimization</a></p>
       </div>
   </div></section>
 
@@ -288,7 +291,7 @@
       <h2>Regularization (cont'd)</h2>
       <ul>
         <li>Penalizing large weights tends to improve generalization.</li>
-        <li>For example, $$ x = [1, 1, 1, 1] \hspace{1em} w_1 = [1, 0, 0, 0] \hspace{1em} w_2 = [0.5, 0.5, 0.5, 0.5]$$
+        <li>For example, $$ x = [1, 1, 1, 1] \quad w_1 = [1, 0, 0, 0] \quad w_2 = [0.5, 0.5, 0.5, 0.5]$$
         where their L2 penalty are 0.5 and 0.25 respectively, \(w_2\) is preferred.</li>
         <li>L2 penalty prefers smaller and more diffuse weight vectors. Imply using more input dimensions instead of betting on one or two.</li>
       </ul>
@@ -306,7 +309,7 @@
             \frac{df(x)}{dx} = \lim_{h\ \to 0} \frac{f(x + h) - f(x)}{h}
           $$
         </li>
-        <li>Called numerical gradients. Practically use \([f(x + h) -  f(x - h)] / 2h\)</li>
+        <li>Aka numerical gradients. Practically use \([f(x + h) -  f(x - h)] / 2h\)</li>
       </ul>
   </div></section>
 
@@ -314,7 +317,7 @@
       <h2>Choose the step size (learning rate)</h2>
       <div class="citation">
         <img src="pics/external/cs231n_note_vis_loss_fun.png" alt="">
-        <p>Ref: <a href="http://cs231n.github.io/optimization-1/">CS231n Note: Linear Clasification</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/optimization-1/">CS231n Note: Linear Clasification</a></p>
       </div>
   </div></section>
 
@@ -324,8 +327,8 @@
         <li>Numerical gradients is slow (think of computing this for all \(W\) dimensions.</li>
         <li>We know Calculus ... so what's the gradient of softmax?
           $$
-          \frac{\partial L_i}{ \partial f_j} = - \left[\mathbb{1}(i = j) - p_j\right] \hspace{1em}
-            p_i = \frac{e^{f_i}}{\sum e^{f}} \hspace{1em}
+          \frac{\partial L_i}{ \partial f_j} = - \left[\mathbb{1}(i = j) - p_j\right] \quad
+            p_i = \frac{e^{f_i}}{\sum e^{f}} \quad
             \frac{\partial f_j}{ \partial w_j} = x_j
           $$
         </li>
@@ -365,7 +368,7 @@ while it &lt; max_iter:
       <h2>Our "artifact" neuron as a linear classifier</h2>
       <div class="citation">
         <img src="pics/external/cs231n_note_neuron.png" alt="" />
-        <p>Ref: <a href="http://cs231n.github.io/neural-networks-1/">CS231n Note: Neural Network 1</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/neural-networks-1/">CS231n Note: Neural Network 1</a></p>
       </div>
       <p>We model the neuron by two parts: linear combination \(\sum w_i x_i\) and activation function \(f\)</p>
   </div></section>
@@ -384,7 +387,7 @@ while it &lt; max_iter:
       <h2 class="tighter">Fully-connected layer</h2>
       <div class="citation">
         <img src="pics/external/cs231n_note_nn_arch.png" alt="">
-        <p>Ref: <a href="http://cs231n.github.io/neural-networks-1/">CS231n Note: Neural Network 1</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/neural-networks-1/">CS231n Note: Neural Network 1</a></p>
       </div>
       <p>Total size of parameters (weights and biases) [input x #neuron]:<br>
         Left is (3 + 1) x 4 + (4 + 1) x 2 = 26.<br>
@@ -414,11 +417,11 @@ out = np.dot(W3, h2) + b3    # output neuron (1x1)</code>
         <li>But how to modify \(W\)s and \(b\)s to yield the desired change of \(\Delta out\)?</li>
         <li>Recall Calculus ... <strong>Use chain rule</strong>
           $$
-          \begin{align*}
-          f(x,y) = x y \hspace{1em} &\rightarrow \hspace{1em} \frac{\partial f}{\partial x} = y  \hspace{1em} \frac{\partial f}{\partial y} = x \\
-          f(x,y) = x + y \hspace{1em} &\rightarrow \hspace{1em} \frac{\partial f}{\partial x} = 1 \hspace{1em} \frac{\partial f}{\partial y} = 1 \\
-          f(x,y) = \max(x, y) \hspace{1em} &\rightarrow \hspace{1em} \frac{\partial f}{\partial x} = \mathbb{1}(x >= y) \hspace{1em} \frac{\partial f}{\partial y} = \mathbb{1}(y >= x)
-          \end{align*}
+          \begin{aligned}
+          f(x,y) = x y \quad &\rightarrow \quad \frac{\partial f}{\partial x} = y  \quad \frac{\partial f}{\partial y} = x \\
+          f(x,y) = x + y \quad &\rightarrow \quad \frac{\partial f}{\partial x} = 1 \quad \frac{\partial f}{\partial y} = 1 \\
+          f(x,y) = \max(x, y) \quad &\rightarrow \quad \frac{\partial f}{\partial x} = \mathbb{1}(x >= y) \quad \frac{\partial f}{\partial y} = \mathbb{1}(y >= x)
+          \end{aligned}
           $$
         </li>
       </ul>
@@ -428,25 +431,27 @@ out = np.dot(W3, h2) + b3    # output neuron (1x1)</code>
       <div class="left">
         <p>
           $$
+          \begin{aligned}
           f(x, y, z) = (x + y) z \\
-          q = x + y, \hspace{0.5em} f = qz
+          q = x + y, \enspace f = qz
+          \end{aligned}
           $$
           $$
-          \begin{align*}
+          \begin{aligned}
           \Rightarrow \frac{\partial q}{\partial x}
             &= \frac{\partial q}{\partial y} = 1
-          \end{align*}
+          \end{aligned}
           $$
 
           $$
-          \begin{align*}
+          \begin{aligned}
           \Rightarrow \frac{\partial f}{\partial x}
             &= \frac{\partial f}{\partial q}\frac{\partial q}{\partial x} = z \cdot 1\\
           \frac{\partial f}{\partial y}
             &= \frac{\partial f}{\partial q}\frac{\partial q}{\partial y} = z \cdot 1\\
           \frac{\partial f}{\partial z}
             &= q
-          \end{align*}
+          \end{aligned}
           $$
         </p>
       </div>
@@ -471,7 +476,7 @@ dfdy = 1.0 * dfdq  # = -4, dq/dy = 1</code>
         <div class="citation next place r b">
           <div class="placeholder"></div>
         <img src="pics/external/cs231n_note_back_prop_simple.png" alt="">
-        <p>Ref: <a href="http://cs231n.github.io/optimization-2/">CS231n Note: Optimization 2</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/optimization-2/">CS231n Note: Optimization 2</a></p>
         </div>
       </div>
       <style>
@@ -490,23 +495,23 @@ dfdy = 1.0 * dfdq  # = -4, dq/dy = 1</code>
         \).<br>
         First compute all the building blocks,
         $$
-        \begin{align*}
+        \begin{aligned}
         f(x) = \frac{1}{x}
-        \hspace{1em} &\rightarrow \hspace{1em}
+        \quad &\rightarrow \quad
         \frac{df}{dx} = -1/x^2
         \\
         f_c(x) = c + x
-        \hspace{1em} &\rightarrow \hspace{1em}
+        \quad &\rightarrow \quad
         \frac{df}{dx} = 1
         \\
         f(x) = e^x
-        \hspace{1em} &\rightarrow \hspace{1em}
+        \quad &\rightarrow \quad
         \frac{df}{dx} = e^x = f(x)
         \\
         f_a(x) = ax
-        \hspace{1em} &\rightarrow \hspace{1em}
+        \quad &\rightarrow \quad
         \frac{df}{dx} = a
-        \end{align*}
+        \end{aligned}
         $$
         Given initial w0, x0, w1, x1, w2 values (cont'd on next page)
       </p>
@@ -516,7 +521,7 @@ dfdy = 1.0 * dfdq  # = -4, dq/dy = 1</code>
       <h2>Backward propagation example (cont'd)</h2>
       <div class="citation">
         <img src="pics/external/cs231n_note_back_prop.png" alt="">
-        <p>Ref: <a href="http://cs231n.github.io/optimization-2/">CS231n Note: Optimization 2</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/optimization-2/">CS231n Note: Optimization 2</a></p>
       </div>
   </div></section>
 
@@ -586,7 +591,7 @@ dX = W.T.dot(dD)</code></pre>
         </div>
         <p class="note">Animations that may help your intuitions about the learning process dynamics. <strong>Left</strong>: Contours of a loss surface and time evolution of different optimization algorithms. Notice the "overshooting" behavior of momentum-based methods, which make the optimization look like a ball rolling down the hill. <strong>Right</strong>: A visualization of a saddle point in the optimization landscape, where the curvature along different dimension has different signs (one dimension curves up and another down). Notice that SGD has a very hard time breaking symmetry and gets stuck on the top. Conversely, algorithms such as RMSprop will see very low gradients in the saddle direction. Tue to the denominator term in the RMSprop update, this will increase the effective learning rate along this direction, helping RMSProp proceed.
         </p>
-        <p>Ref: <a href="http://cs231n.github.io/neural-networks-3/">CS231n Note: Neural Network 3</a> and Image credit: <a href="https://twitter.com/alecrad">Alec Radford</a>.</p>
+        <p>Ref: <a href="https://cs231n.github.io/neural-networks-3/">CS231n Note: Neural Network 3</a> and Image credit: <a href="https://twitter.com/alecrad">Alec Radford</a>.</p>
       </div>
       <style>
         #comp-param-update .citation .twocol {
@@ -625,7 +630,7 @@ dX = W.T.dot(dD)</code></pre>
       <h2>ConvNet introduces depth</h2>
       <div class="citation">
         <img src="pics/external/cs231n_note_cnn_arch.png" alt="">
-        <p>Ref: <a href="http://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
       </div>
       <p>Input viewed as 32 width x 32 height x 3 channels (depth)<br>
         Output viewed as 1 x 1 x 10. Spatial information is preserved.</p>
@@ -634,7 +639,7 @@ dX = W.T.dot(dD)</code></pre>
   <section class="slide"><div>
       <div class="citation">
         <img src="pics/external/cs231n_note_receptive_field.png" alt="">
-        <p>Ref: <a href="http://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
       </div>
       <p>Receptive field: height and width of the spatially bounded input of <em>all depths</em> the neuron next stage takes from the former layer.</p>
   </div></section>
@@ -653,7 +658,7 @@ dX = W.T.dot(dD)</code></pre>
       <h2>Receptive field vs output size example</h2>
       <div class="citation">
         <img src="pics/external/cs231n_note_receptive_field_ex.png" alt="">
-        <p>Ref: <a href="http://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
       </div>
   </div></section>
 
@@ -682,7 +687,7 @@ dX = W.T.dot(dD)</code></pre>
       <h2>ImageNet 1st Conv layer filter visualization</h2>
       <div class="citation">
         <img src="pics/external/cs231n_note_conv_filter.png" alt="">
-        <p>Ref: <a href="http://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
       </div>
   </div></section>
 
@@ -698,8 +703,8 @@ dX = W.T.dot(dD)</code></pre>
 
   <section class="slide"><div>
       <div class="citation">
-        <p style="text-align: left; margin: 0 0 5px 10px;">Ref: <a href="http://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
-        <iframe id="embed-frame" src="http://cs231n.github.io/assets/conv-demo/index.html" frameborder="0"></iframe>
+        <p style="text-align: left; margin: 0 0 5px 10px;">Ref: <a href="https://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
+        <iframe id="embed-frame" src="https://cs231n.github.io/assets/conv-demo/index.html" frameborder="0"></iframe>
       </div>
       <style>
         #embed-frame {
@@ -720,7 +725,7 @@ dX = W.T.dot(dD)</code></pre>
       <h2>Max Pooling Layer</h2>
       <div class="citation">
         <img src="pics/external/cs231n_note_conv_pooling.png" alt="">
-        <p>Ref: <a href="http://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
+        <p>Ref: <a href="https://cs231n.github.io/convolutional-networks/">CS231n Note: Convolutional Netowrks</a></p>
       </div>
   </div></section>
 
@@ -831,6 +836,11 @@ dX = W.T.dot(dD)</code></pre>
   <!-- During local development, use localhost mathjax for speed-->
   <!--<script src="file:///Users/liang/.ipython/profile_default/static/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
   <!-- online Mathjax CDN -->
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js" integrity="sha256-Jv5VrSHYxxBmh18hQUviB4OiVzOkDHdO0uY4GtrCMDQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/contrib/auto-render.min.js" integrity="sha256-Wb+blP9KCjsV65XUTmxKT/fisoQQM3D4bqphG8l+p9E=" crossorigin="anonymous"></script>
+  <script>
+    renderMathInElement(document.body);
+  </script>
 </body>
 </html>
